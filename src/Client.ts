@@ -356,8 +356,14 @@ export class Client {
 
         };
 
-        var response = await this.post("query", JSON.stringify(param));       
-        return await response.json();
+        var response = await this.post("query", JSON.stringify(param)); 
+        console.log("Response:", response);
+        
+        let parsedResponse =  await response.json()
+
+        if (!parsedResponse.rows)
+            parsedResponse.rows = [];
+        return parsedResponse;
     }
 
     async compose(composition: string): Promise<any> {

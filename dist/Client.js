@@ -275,7 +275,13 @@ class Client {
             queryContext: queryContext
         };
         var response = await this.post("query", JSON.stringify(param));
-        return await response.json();
+        console.log("Response:", response);
+        if (!response.ok)
+            console.log("Not ok");
+        let parsedResponse = await response.json();
+        if (!parsedResponse.rows)
+            parsedResponse.rows = [];
+        return parsedResponse;
     }
     async compose(composition) {
         var buffer = buffer_1.Buffer.from(composition);
