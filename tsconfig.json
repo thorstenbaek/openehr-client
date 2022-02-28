@@ -1,38 +1,39 @@
 {
-    // "compilerOptions": {
-    //   "module": "commonjs",
-    //   "target": "es2020",
-    //   "declaration": true,
-    //   "outDir": "dist"
-    // },
-    // "include": [
-    //   "src/**/*"
-    // ]
-
     "compilerOptions": {
-
-      // Generate source maps for the original TS files.
-      // "sourceMap": true,
-
-      // We want strict validation
-      // "strict"       : true,
-      // "noImplicitAny": true,
-      // "alwaysStrict" : true,
-
-      // Just transpile TS to modern JS. Babel will take over from there and
-      // compile depending on the target environments.
-      "module"       : "CommonJS",
-      "target"       : "es2020",
-      
+      "module": "commonjs",
+      "target": "es2020",
       "declaration": true,
-      "importHelpers": false,
-      "noEmitHelpers": true,
-      "outDir": "dist"
-  },
-  "include": [
-      "src/**/*"
-  ],
-  "exclude": [
-      "node_modules"
-  ],
+      "outDir": "./lib"
+    },
+    "include": [
+      "src"
+    ],
+    "exclude": ["node_modules"]
+
+  //   "compilerOptions": {
+
+  //     // Generate source maps for the original TS files.
+  //     // "sourceMap": true,
+
+  //     // We want strict validation
+  //     // "strict"       : true,
+  //     // "noImplicitAny": true,
+  //     // "alwaysStrict" : true,
+
+  //     // Just transpile TS to modern JS. Babel will take over from there and
+  //     // compile depending on the target environments.
+  //     "module"       : "CommonJS",
+  //     "target"       : "es2020",
+      
+  //     "declaration": true,
+  //     "importHelpers": false,
+  //     "noEmitHelpers": true,
+  //     "outDir": "dist"
+  // },
+  // "include": [
+  //     "src/**/*"
+  // ],
+  // "exclude": [
+  //     "node_modules"
+  // ],
 }
