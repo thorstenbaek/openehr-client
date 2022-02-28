@@ -1,11 +1,38 @@
 {
+    // "compilerOptions": {
+    //   "module": "commonjs",
+    //   "target": "es2020",
+    //   "declaration": true,
+    //   "outDir": "dist"
+    // },
+    // "include": [
+    //   "src/**/*"
+    // ]
+
     "compilerOptions": {
-      "module": "commonjs",
-      "target": "es2020",
+
+      // Generate source maps for the original TS files.
+      // "sourceMap": true,
+
+      // We want strict validation
+      // "strict"       : true,
+      // "noImplicitAny": true,
+      // "alwaysStrict" : true,
+
+      // Just transpile TS to modern JS. Babel will take over from there and
+      // compile depending on the target environments.
+      "module"       : "CommonJS",
+      "target"       : "es2020",
+      
       "declaration": true,
-      "outDir": "./dist"
-    },
-    "include": [
+      "importHelpers": false,
+      "noEmitHelpers": true,
+      "outDir": "dist"
+  },
+  "include": [
       "src/**/*"
-    ]
-  }
+  ],
+  "exclude": [
+      "node_modules"
+  ],
+}

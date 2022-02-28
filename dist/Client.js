@@ -276,8 +276,6 @@ class Client {
         };
         var response = await this.post("query", JSON.stringify(param));
         console.log("Response:", response);
-        if (!response.ok)
-            console.log("Not ok");
         let parsedResponse = await response.json();
         if (!parsedResponse.rows)
             parsedResponse.rows = [];
