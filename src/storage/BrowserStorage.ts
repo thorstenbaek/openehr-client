@@ -1,10 +1,6 @@
-export interface Storage {
-    get(key: string): Promise<any>
-    set(key: string, value: any): Promise<any>
-    unset(key: string): Promise<boolean>
-}
+import {openehrclient} from "../types";
 
-export class BrowserStorage implements Storage{
+export class BrowserStorage {
 
     async get(key: string): Promise<any> {
         const value = sessionStorage[key];

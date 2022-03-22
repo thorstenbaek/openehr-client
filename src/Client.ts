@@ -1,11 +1,16 @@
-import {env} from "./Environment";
+import {openehrclient} from "./types";
 import {Buffer} from "buffer/";
 import { randomString, getAndCache, request, assert, jwtDecode, getPath } from "./lib";
 import DocumentRequest from "./DocumentRequest";
 
 export const SMART_KEY = "SMART_KEY";
 
-export async function authorize(params: AuthorizeParams) : Promise<Client> {
+
+export async function authorize(
+    env: openehrclient.Environment,
+    params: AuthorizeParams
+): Promise<Client> 
+{
     const url = env.getUrl(); new URL(location + "");
     
      // Obtain input
