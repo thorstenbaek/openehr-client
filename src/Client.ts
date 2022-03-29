@@ -1,4 +1,4 @@
-import {env} from "./Environment";
+import {env} from "./environments/BrowserEnvironment";
 import {Buffer} from "buffer/";
 import { randomString, getAndCache, request, assert, jwtDecode, getPath } from "./lib";
 import DocumentRequest from "./DocumentRequest";
@@ -345,22 +345,38 @@ export class Client {
         })        
     }
 
-    async query(aql: string, queryParameters: {[name:string]:object} = {}): Promise<any> {        
+    async query(aql: string, queryParameters: {[name:string]:object} = {}): Promise<any> {
         let queryContext: {[name:string]:[string]} = {};
         queryContext.PatientId = [this.patient];
-        
         var param = {
             q: aql,
             query_parameters: queryParameters,
             queryContext: queryContext
-
         };
-
-        var response = await this.post("query", JSON.stringify(param));       
-        return await response.json();
+        var response = await this.post("query", JSON.stringify(param));
+        console.log("Response:", response);
+        let parsedResponse =  await response.json()
+        if (!parsedResponse.rows)
+            parsedResponse.rows = [];
+        return parsedResponse;
     }
 
-    async compose(composition: string): Promise<any> {
+    // async query(aql: string, queryParameters: {[name:string]:object} = {}): Promise<any> {        
+    //     let queryContext: {[name:string]:[string]} = {};
+    //     queryContext.PatientId = [this.patient];
+        
+    //     var param = {
+    //         q: aql,
+    //         query_parameters: queryParameters,
+    //         queryContext: queryContext
+
+    //     };
+
+    //     var response = await this.post("query", JSON.stringify(param));       
+    //     return await response.json();
+    // }
+
+    async compose(composition: string, documentTypeId: number, templateId: number): Promise<any> {
         var buffer = Buffer.from(composition);
         var base64string = buffer.toString("base64");
 
@@ -368,8 +384,8 @@ export class Client {
         var documentRequest: DocumentRequest = {
             content: base64string,
             contentType: "application/json",
-            templateId: 1002701,
-            documentTypeId: 1001414,
+            templateId: templateId,
+            documentTypeId: documentTypeId,
             patientId: parseInt(this.patient),
             authorId: 1004733, //Rekvirent: Thor Stenbæk  dips-hcpid": "1004733"
             eventTime: new Date().toISOString(),

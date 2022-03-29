@@ -1,17 +1,9 @@
-import {Storage, BrowserStorage} from "./BrowserStorage";
+import {BrowserStorage} from "../storage/BrowserStorage";
+import {openehrclient} from "../types"
 
-export interface Environment {
-    getUrl():URL;
-    getStorage(): Storage;
-    relative(path: string):string;
-    redirect(to: string): void | Promise<any>;
-    btoa(str: string): string;
-    atob(str: string): string;
-}
-
-class BrowserEnvironment implements Environment {
+class BrowserEnvironment implements openehrclient.Environment {
     _url: URL;
-    _storage: Storage;
+    _storage: openehrclient.Storage;
     
     constructor() {
         this._storage = null;
@@ -24,7 +16,7 @@ class BrowserEnvironment implements Environment {
         return this._url;
     }
 
-    getStorage(): Storage {
+    getStorage(): BrowserStorage {
         if (this._storage == null) {
             this._storage = new BrowserStorage()
         }
@@ -48,4 +40,4 @@ class BrowserEnvironment implements Environment {
     }
 }
 
-export const env:Environment = new BrowserEnvironment();
+export const env:openehrclient.Environment = new BrowserEnvironment();

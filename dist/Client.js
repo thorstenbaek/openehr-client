@@ -1,26 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = exports.completeAuth = exports.getAccessTokenExpiration = exports.buildTokenRequest = exports.ready = exports.getSecurityExtensions = exports.fetchWellKnownJson = exports.authorize = exports.SMART_KEY = void 0;
-const Environment_1 = require("./Environment");
+const BrowserEnvironment_1 = require("./environments/BrowserEnvironment");
 const buffer_1 = require("buffer/");
 const lib_1 = require("./lib");
 exports.SMART_KEY = "SMART_KEY";
 async function authorize(params) {
-    const url = Environment_1.env.getUrl();
+    const url = BrowserEnvironment_1.env.getUrl();
     new URL(location + "");
     // Obtain input
     const { clientSecret, fakeTokenResponse, patientId, encounterId, target, width, height } = params;
     let { iss, launch, fhirServiceUrl, redirectUri, scope = "", clientId, completeInTarget } = params;
-    const storage = Environment_1.env.getStorage();
+    const storage = BrowserEnvironment_1.env.getStorage();
     // For these three an url param takes precedence over inline option
     iss = url.searchParams.get("iss") || iss;
     fhirServiceUrl = url.searchParams.get("fhirServiceUrl") || fhirServiceUrl;
     launch = url.searchParams.get("launch") || launch;
     if (!redirectUri) {
-        redirectUri = Environment_1.env.relative(".");
+        redirectUri = BrowserEnvironment_1.env.relative(".");
     }
     else if (!redirectUri.match(/^https?\:\/\//)) {
-        redirectUri = Environment_1.env.relative(redirectUri);
+        redirectUri = BrowserEnvironment_1.env.relative(redirectUri);
     }
     if (iss) {
         console.log(`Making EHR launch...`);
@@ -65,7 +65,7 @@ async function authorize(params) {
     console.log(redirectUrl);
     if (iss) {
         await storage.set(stateKey, state);
-        return await Environment_1.env.redirect(redirectUrl);
+        return await BrowserEnvironment_1.env.redirect(redirectUrl);
     }
 }
 exports.authorize = authorize;
@@ -149,7 +149,7 @@ function buildTokenRequest(code, state) {
     // Basic authentication is required, where the username is the app’s
     // client_id and the password is the app’s client_secret (see example).
     if (clientSecret) {
-        requestOptions.headers.Authorization = "Basic " + Environment_1.env.btoa(clientId + ":" + clientSecret);
+        requestOptions.headers.Authorization = "Basic " + BrowserEnvironment_1.env.btoa(clientId + ":" + clientSecret);
         //debug("Using state.clientSecret to construct the authorization header: %s", requestOptions.headers.Authorization);
     }
     else {
@@ -173,7 +173,7 @@ function getAccessTokenExpiration(tokenResponse) {
     }
     // Option 2 - using the exp property of JWT tokens (must not assume JWT!)
     if (tokenResponse.access_token) {
-        let tokenBody = (0, lib_1.jwtDecode)(tokenResponse.access_token, Environment_1.env);
+        let tokenBody = (0, lib_1.jwtDecode)(tokenResponse.access_token, BrowserEnvironment_1.env);
         if (tokenBody && tokenBody.exp) {
             return tokenBody.exp;
         }
@@ -188,8 +188,8 @@ exports.getAccessTokenExpiration = getAccessTokenExpiration;
  * authorization server..
  */
 async function completeAuth() {
-    const url = Environment_1.env.getUrl();
-    const storage = Environment_1.env.getStorage();
+    const url = BrowserEnvironment_1.env.getUrl();
+    const storage = BrowserEnvironment_1.env.getStorage();
     const params = url.searchParams;
     let key = params.get("state");
     const code = params.get("code");
@@ -275,16 +275,31 @@ class Client {
             queryContext: queryContext
         };
         var response = await this.post("query", JSON.stringify(param));
-        return await response.json();
+        console.log("Response:", response);
+        let parsedResponse = await response.json();
+        if (!parsedResponse.rows)
+            parsedResponse.rows = [];
+        return parsedResponse;
     }
-    async compose(composition) {
+    // async query(aql: string, queryParameters: {[name:string]:object} = {}): Promise<any> {        
+    //     let queryContext: {[name:string]:[string]} = {};
+    //     queryContext.PatientId = [this.patient];
+    //     var param = {
+    //         q: aql,
+    //         query_parameters: queryParameters,
+    //         queryContext: queryContext
+    //     };
+    //     var response = await this.post("query", JSON.stringify(param));       
+    //     return await response.json();
+    // }
+    async compose(composition, documentTypeId, templateId) {
         var buffer = buffer_1.Buffer.from(composition);
         var base64string = buffer.toString("base64");
         var documentRequest = {
             content: base64string,
             contentType: "application/json",
-            templateId: 1002701,
-            documentTypeId: 1001414,
+            templateId: templateId,
+            documentTypeId: documentTypeId,
             patientId: parseInt(this.patient),
             authorId: 1004733,
             eventTime: new Date().toISOString(),

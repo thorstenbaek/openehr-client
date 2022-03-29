@@ -54,5 +54,5 @@ export declare class Client {
     query(aql: string, queryParameters?: {
         [name: string]: object;
     }): Promise<any>;
-    compose(composition: string): Promise<any>;
+    compose(composition: string, documentTypeId: number, templateId: number): Promise<any>;
 }

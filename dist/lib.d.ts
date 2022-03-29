@@ -1,4 +1,4 @@
-import { Environment } from "./Environment";
+import { openehrclient } from "./types";
 /**
  * A namespace with functions for converting between different measurement units
  */
@@ -93,7 +93,7 @@ export declare function randomString(strLength?: number, charSet?: string): stri
  * @param env An `Adapter` or any other object that has an `atob` method
  * @category Utility
  */
-export declare function jwtDecode(token: string, env: Environment): Record<string, any> | null;
+export declare function jwtDecode(token: string, env: openehrclient.Environment): Record<string, any> | null;
 /**
  * Given a token response, computes and returns the expiresAt timestamp.
  * Note that this should only be used immediately after an access token is

@@ -1,4 +1,5 @@
-import { Environment } from "./Environment";
+//import { Environment } from "./environments/Environment";
+import { openehrclient } from "./types";
 /*
  * This file contains some shared functions. They are used by other modules, but
  * are defined here so that tests can import this library and test them.
@@ -325,7 +326,7 @@ export function randomString(
  * @param env An `Adapter` or any other object that has an `atob` method
  * @category Utility
  */
-export function jwtDecode(token: string, env: Environment): Record<string, any> | null
+export function jwtDecode(token: string, env: openehrclient.Environment): Record<string, any> | null
 {
     const payload = token.split(".")[1];
     return payload ? JSON.parse(env.atob(payload)) : null;
