@@ -1,10 +1,6 @@
-export interface Storage {
-    get(key: string): Promise<any>
-    set(key: string, value: any): Promise<any>
-    unset(key: string): Promise<boolean>
-}
+import {Storage} from "./Storage";
 
-export class BrowserStorage implements Storage{
+export class BrowserStorage implements Storage {
 
     async get(key: string): Promise<any> {
         const value = sessionStorage[key];

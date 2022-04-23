@@ -1,7 +1,7 @@
 export default interface DocumentRequest {
-    content?: string, 
+    content?: string,
     contentType: string,
-    templateId:	number,
+    templateId: number,
     documentTypeId: number,
     patientId: number,
     //referralId?: number,    
@@ -9,7 +9,7 @@ export default interface DocumentRequest {
     //departmentId?: number,    
     //plannedContactId?: number,    
     authorId: number,
-    eventTime?: string    
+    eventTime?: string
     //eprGroupIds: number[],
     //sectionId?: number,
     //wardId?: number,

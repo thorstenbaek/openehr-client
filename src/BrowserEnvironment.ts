@@ -1,18 +1,11 @@
-import {Storage, BrowserStorage} from "./BrowserStorage";
+import {BrowserStorage} from "./BrowserStorage";
+import {Storage} from "./Storage";
+import {Environment} from "./models/Environment";
 
-export interface Environment {
-    getUrl():URL;
-    getStorage(): Storage;
-    relative(path: string):string;
-    redirect(to: string): void | Promise<any>;
-    btoa(str: string): string;
-    atob(str: string): string;
-}
-
-class BrowserEnvironment implements Environment {
+export class BrowserEnvironment implements Environment {
     _url: URL;
     _storage: Storage;
-    
+
     constructor() {
         this._storage = null;
     }
@@ -26,7 +19,7 @@ class BrowserEnvironment implements Environment {
 
     getStorage(): Storage {
         if (this._storage == null) {
-            this._storage = new BrowserStorage()
+            this._storage = new BrowserStorage();
         }
         return this._storage;
     }
@@ -35,8 +28,8 @@ class BrowserEnvironment implements Environment {
         return new URL(path, this.getUrl().href).href;
     }
 
-    redirect(to: string): void | Promise<any>{
-        location.href = to;        
+    redirect(to: string): void | Promise<any> {
+        location.href = to;
     }
 
     btoa(str: string): string {
@@ -47,5 +40,4 @@ class BrowserEnvironment implements Environment {
         return window.atob(str);
     }
 }
-
-export const env:Environment = new BrowserEnvironment();
+export const env: Environment = new BrowserEnvironment();
