@@ -8,19 +8,18 @@
  */
 
 export function setPath(obj: Record<string, any>, path: string, value: any, createEmpty = false): Record<string, any> {
-    path.trim().split(".").reduce(
-        (out, key, idx, arr) => {
-            if (out && idx === arr.length - 1) {
-                out[key] = value;
-            }
-            else {
-                if (out && out[key] === undefined && createEmpty) {
-                    out[key] = arr[idx + 1].match(/^[0-9]+$/) ? [] : {};
-                }
-                return out ? out[key] : undefined;
-            }
-        },
-        obj
-    );
-    return obj;
+  path
+    .trim()
+    .split('.')
+    .reduce((out, key, idx, arr) => {
+      if (out && idx === arr.length - 1) {
+        out[key] = value;
+      } else {
+        if (out && out[key] === undefined && createEmpty) {
+          out[key] = arr[idx + 1].match(/^[0-9]+$/) ? [] : {};
+        }
+        return out ? out[key] : undefined;
+      }
+    }, obj);
+  return obj;
 }

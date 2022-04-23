@@ -1,82 +1,77 @@
-import {Buffer} from "buffer/";
-import {getPath} from "./lib/getPath";
-import DocumentRequest from "./models/DocumentRequest";
+import { Buffer } from 'buffer/';
+import { getPath } from './lib/getPath';
+import DocumentRequest from './models/DocumentRequest';
 
-export const SMART_KEY = "SMART_KEY";
-
-
+export const SMART_KEY = 'SMART_KEY';
 
 export class Client {
-    /**
-     * The SMART on OpenEHR Client
-     */
-    state: ClientState;
-    patient: string;
-    encounter: string;
-    resource: string;
+  /**
+   * The SMART on OpenEHR Client
+   */
+  state: ClientState;
+  patient: string;
+  encounter: string;
+  resource: string;
 
-    constructor(state: ClientState) {
-
-        var patientId = state.tokenResponse.patient;
-        if (patientId.startsWith("cdp")) {
-            patientId = patientId.substring(3);
-        }
-
-        console.log(state);
-        this.state = state;
-        this.patient = patientId;
-        this.encounter = state.tokenResponse.encounter;
-        this.resource = state.tokenResponse.resource;
+  constructor(state: ClientState) {
+    let patientId = state.tokenResponse.patient;
+    if (patientId.startsWith('cdp')) {
+      patientId = patientId.substring(3);
     }
 
-    getState(path = "") {
-        return getPath({...this.state}, path);
-    }
+    console.log(state);
+    this.state = state;
+    this.patient = patientId;
+    this.encounter = state.tokenResponse.encounter;
+    this.resource = state.tokenResponse.resource;
+  }
 
-    post(relativeUrl: string, body: string): Promise<any> {
-        return fetch(`${this.state.serverUrl}/${relativeUrl}`, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + this.state.tokenResponse.access_token,
-            },
-            body: body
-        })
-    }
+  getState(path = '') {
+    return getPath({ ...this.state }, path);
+  }
 
-    async query(aql: string, queryParameters: {[name: string]: object} = {}): Promise<any> {
-        let queryContext: {[name: string]: [string]} = {};
-        queryContext.PatientId = [this.patient];
+  post(relativeUrl: string, body: string): Promise<any> {
+    return fetch(`${this.state.serverUrl}/${relativeUrl}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.state.tokenResponse.access_token,
+      },
+      body: body,
+    });
+  }
 
-        var param = {
-            q: aql,
-            query_parameters: queryParameters,
-            queryContext: queryContext
+  async query(aql: string, queryParameters: { [name: string]: object } = {}): Promise<any> {
+    const queryContext: { [name: string]: [string] } = {};
+    queryContext.PatientId = [this.patient];
 
-        };
+    const param = {
+      q: aql,
+      query_parameters: queryParameters,
+      queryContext: queryContext,
+    };
 
-        var response = await this.post("query", JSON.stringify(param));
-        return await response.json();
-    }
+    const response = await this.post('query', JSON.stringify(param));
+    return await response.json();
+  }
 
-    async compose(composition: string): Promise<any> {
-        var buffer = Buffer.from(composition);
-        var base64string = buffer.toString("base64");
+  async compose(composition: string): Promise<any> {
+    const buffer = Buffer.from(composition);
+    const base64string = buffer.toString('base64');
 
+    const documentRequest: DocumentRequest = {
+      content: base64string,
+      contentType: 'application/json',
+      templateId: 1002701,
+      documentTypeId: 1001414,
+      patientId: parseInt(this.patient),
+      authorId: 1004733, //Rekvirent: Thor Stenbæk  dips-hcpid": "1004733"
+      eventTime: new Date().toISOString(),
+      documentFormat: 16,
+    };
 
-        var documentRequest: DocumentRequest = {
-            content: base64string,
-            contentType: "application/json",
-            templateId: 1002701,
-            documentTypeId: 1001414,
-            patientId: parseInt(this.patient),
-            authorId: 1004733, //Rekvirent: Thor Stenbæk  dips-hcpid": "1004733"
-            eventTime: new Date().toISOString(),
-            documentFormat: 16
-        }
-
-        const response = await this.post("document", JSON.stringify(documentRequest));
-        return response.ok;
-    }
+    const response = await this.post('document', JSON.stringify(documentRequest));
+    return response.ok;
+  }
 }

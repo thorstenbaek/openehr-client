@@ -6,8 +6,8 @@
  */
 
 export function makeArray<T = any>(arg: any): T[] {
-    if (Array.isArray(arg)) {
-        return arg;
-    }
-    return [arg];
+  if (Array.isArray(arg)) {
+    return arg;
+  }
+  return [arg];
 }

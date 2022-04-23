@@ -240,7 +240,7 @@ export async function getTargetWindow(target: fhirclient.WindowTarget, width: nu
 */
 
 export function assert(condition: any, message: string): asserts condition {
-    if (!(condition)) {
-        throw new Error(message);
-    }
+  if (!condition) {
+    throw new Error(message);
+  }
 }

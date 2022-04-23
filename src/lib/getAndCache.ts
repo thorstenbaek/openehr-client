@@ -1,4 +1,4 @@
-import {request} from "./request";
+import { request } from './request';
 
 /**
  * Makes a request using `fetch` and stores the result in internal memory cache.
@@ -9,10 +9,14 @@ import {request} from "./request";
  * already been cached.
  */
 
-export function getAndCache(url: string, requestOptions?: RequestInit, force: boolean = /*process.env.NODE_ENV === "test"*/ true): Promise<any> {
-    // if (force || !cache[url]) {        
-    //     cache[url] = request(url/*, requestOptions*/);
-    //     return cache[url];
-    // }
-    return Promise.resolve(request(url, requestOptions));
+export function getAndCache(
+  url: string,
+  requestOptions?: RequestInit,
+  force = /*process.env.NODE_ENV === "test"*/ true,
+): Promise<any> {
+  // if (force || !cache[url]) {
+  //     cache[url] = request(url/*, requestOptions*/);
+  //     return cache[url];
+  // }
+  return Promise.resolve(request(url, requestOptions));
 }

@@ -1,4 +1,4 @@
-import {getAndCache} from "../lib/getAndCache";
+import { getAndCache } from '../lib/getAndCache';
 
 /**
  * Fetches the well-known json file from the given base URL.
@@ -7,12 +7,12 @@ import {getAndCache} from "../lib/getAndCache";
  * @param baseUrl The base URL of the FHIR server
  */
 
-export function fetchWellKnownJson(baseUrl = "/", requestOptions?: RequestInit): Promise<WellKnownSmartConfiguration> {
-    const url = String(baseUrl).replace(/\/*$/, "/") + ".well-known/smart-configuration";
+export function fetchWellKnownJson(baseUrl = '/', requestOptions?: RequestInit): Promise<WellKnownSmartConfiguration> {
+  const url = String(baseUrl).replace(/\/*$/, '/') + '.well-known/smart-configuration';
 
-    console.log("Oauth url", url);
+  console.log('Oauth url', url);
 
-    return getAndCache(url, requestOptions).catch((ex: Error) => {
-        throw new Error(`Failed to fetch the well-known json "${url}". ${ex.message}`);
-    });
+  return getAndCache(url, requestOptions).catch((ex: Error) => {
+    throw new Error(`Failed to fetch the well-known json "${url}". ${ex.message}`);
+  });
 }

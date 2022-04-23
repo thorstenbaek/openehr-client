@@ -26,23 +26,23 @@ export function fetchConformanceStatement(baseUrl = "/", requestOptions?: Reques
  * @returns {*} Whatever is found in the path or undefined
  */
 
-export function getPath(obj: Record<string, any>, path = ""): any {
-    path = path.trim();
-    if (!path) {
-        return obj;
+export function getPath(obj: Record<string, any>, path = ''): any {
+  path = path.trim();
+  if (!path) {
+    return obj;
+  }
+
+  const segments = path.split('.');
+  let result = obj;
+
+  while (result && segments.length) {
+    const key = segments.shift();
+    if (!key && Array.isArray(result)) {
+      return result.map((o) => getPath(o, segments.join('.')));
+    } else {
+      result = result[key as string];
     }
+  }
 
-    let segments = path.split(".");
-    let result = obj;
-
-    while (result && segments.length) {
-        const key = segments.shift();
-        if (!key && Array.isArray(result)) {
-            return result.map(o => getPath(o, segments.join(".")));
-        } else {
-            result = result[key as string];
-        }
-    }
-
-    return result;
+  return result;
 }

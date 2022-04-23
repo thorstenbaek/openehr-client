@@ -1,5 +1,5 @@
-import {responseToJSON} from "./responseToJSON";
-import {checkResponse} from "./checkResponse";
+import {responseToJSON} from './responseToJSON';
+import {checkResponse} from './checkResponse';
 
 /**
  * This is our built-in request function. It does a few things by default
@@ -13,38 +13,36 @@ import {checkResponse} from "./checkResponse";
  */
 
 export function request(url: string | Request, requestOptions: FetchOptions = {}): Promise<any> {
-    console.log(url);
+  console.log(url);
 
-    const {includeResponse, ...options} = requestOptions;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {includeResponse, ...options} = requestOptions;
 
-    return fetch(url, {
-        mode: "cors",
-        ...options,
-        headers: {
-            accept: "application.json",
-            ...options.headers
-        }
+  return fetch(url, {
+    mode: 'cors',
+    ...options,
+    headers: {
+      accept: 'application.json',
+      ...options.headers,
+    },
+  })
+    .then(checkResponse)
+    .then((res: Response) => {
+      console.log(res);
+      const type = res.headers.get('Content-Type') + '';
+      if (type.match(/\bjson\b/i)) {
+        return responseToJSON(res).then((body) => ({res, body}));
+      }
+      if (type.match(/^text\//i)) {
+        return res.text().then((body) => ({res, body}));
+      }
+      return {res};
     })
-        .then(checkResponse)
-        .then((res: Response) => {
-            console.log(res);
-            const type = res.headers.get("Content-Type") + "";
-            if (type.match(/\bjson\b/i)) {
-                return responseToJSON(res).then(body => ({res, body}));
-            }
-            if (type.match(/^text\//i)) {
-                return res.text().then(body => ({res, body}));
-            }
-            return {res};
-        })
-        .then(({res, body}: {res: Response; body?: string;}) => {
-            return body;
-        });
+    .then(({res, body}: {res: Response; body?: string}) => {
+      return body;
+    });
 
-
-
-
-    /*const { includeResponse, ...options } = requestOptions;
+  /*const { includeResponse, ...options } = requestOptions;
     return fetch(url, {
         mode: "cors",
         ...options,

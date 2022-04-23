@@ -58,5 +58,5 @@ export async function checkResponse(resp: Response): Promise<Response> {
  */
 
 export function responseToJSON(resp: Response): Promise<object | string> {
-    return resp.text().then(text => text.length ? JSON.parse(text) : "");
+  return resp.text().then((text) => (text.length ? JSON.parse(text) : ''));
 }

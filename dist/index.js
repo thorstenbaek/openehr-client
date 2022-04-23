@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.myTypes = exports.ready = exports.authorize = void 0;
-var Client_1 = require("./Client");
-Object.defineProperty(exports, "authorize", { enumerable: true, get: function () { return Client_1.authorize; } });
-Object.defineProperty(exports, "ready", { enumerable: true, get: function () { return Client_1.ready; } });
+exports.myTypes = void 0;
+/* eslint-disable @typescript-eslint/no-namespace */
 const clienttypes = require("./Client");
 var myTypes;
 (function (myTypes) {

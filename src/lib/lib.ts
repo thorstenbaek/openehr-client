@@ -4,7 +4,6 @@
  */
 
 // $lab:coverage:off$
-// @ts-ignore
 //const { fetch } = typeof FHIRCLIENT_PURE !== "undefined" ? window : require("cross-fetch");
 // $lab:coverage:on$
 
@@ -15,5 +14,3 @@
  * The cache for the `getAndCache` function
  */
 //const cache: Record<string, any> = {};
-
-

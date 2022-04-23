@@ -8,13 +8,13 @@
  */
 
 export function randomString(
-    strLength = 8,
-    charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  strLength = 8,
+  charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
 ): string {
-    const result = [];
-    const len = charSet.length;
-    while (strLength--) {
-        result.push(charSet.charAt(Math.floor(Math.random() * len)));
-    }
-    return result.join("");
+  const result = [];
+  const len = charSet.length;
+  while (strLength--) {
+    result.push(charSet.charAt(Math.floor(Math.random() * len)));
+  }
+  return result.join('');
 }

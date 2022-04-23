@@ -6,9 +6,7 @@
  */
 
 export function absolute(path: string, baseUrl?: string): string {
-    if (path.match(/^http/))
-        return path;
-    if (path.match(/^urn/))
-        return path;
-    return String(baseUrl || "").replace(/\/+$/, "") + "/" + path.replace(/^\/+/, "");
+  if (path.match(/^http/)) return path;
+  if (path.match(/^urn/)) return path;
+  return String(baseUrl || '').replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
 }

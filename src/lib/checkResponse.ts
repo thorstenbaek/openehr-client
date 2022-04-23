@@ -3,8 +3,8 @@
  */
 
 export async function checkResponse(resp: Response): Promise<Response> {
-    if (!resp.ok) {
-        throw new Error("response failed");
-    }
-    return resp;
+  if (!resp.ok) {
+    throw new Error('response failed');
+  }
+  return resp;
 }
