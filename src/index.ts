@@ -1,11 +1,4 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-import * as clienttypes from './Client';
-
-export namespace myTypes {
-  export import clientypes = clienttypes;
-}
-//export function client(stateOrURI: fhirclient.ClientState | string): Client;
-/*export const AbortController: {
-    new (): AbortController;
-    prototype: AbortController;
-};*/
+import { Client } from './Client';
+import { authorize } from './smart_functions/authorize';
+export { Client as openEHRClient };
+export { authorize as SmartAuthorize };

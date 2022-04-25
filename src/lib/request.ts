@@ -1,5 +1,5 @@
-import {responseToJSON} from './responseToJSON';
-import {checkResponse} from './checkResponse';
+import { responseToJSON } from './responseToJSON';
+import { checkResponse } from './checkResponse';
 
 /**
  * This is our built-in request function. It does a few things by default
@@ -16,7 +16,7 @@ export function request(url: string | Request, requestOptions: FetchOptions = {}
   console.log(url);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {includeResponse, ...options} = requestOptions;
+  const { includeResponse, ...options } = requestOptions;
 
   return fetch(url, {
     mode: 'cors',
@@ -31,14 +31,14 @@ export function request(url: string | Request, requestOptions: FetchOptions = {}
       console.log(res);
       const type = res.headers.get('Content-Type') + '';
       if (type.match(/\bjson\b/i)) {
-        return responseToJSON(res).then((body) => ({res, body}));
+        return responseToJSON(res).then((body) => ({ res, body }));
       }
       if (type.match(/^text\//i)) {
-        return res.text().then((body) => ({res, body}));
+        return res.text().then((body) => ({ res, body }));
       }
-      return {res};
+      return { res };
     })
-    .then(({res, body}: {res: Response; body?: string}) => {
+    .then(({ res, body }: { res: Response; body?: string }) => {
       return body;
     });
 

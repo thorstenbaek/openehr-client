@@ -1,6 +1,7 @@
-import { Buffer } from 'buffer/';
+import { Buffer } from 'buffer';
 import { getPath } from './lib/getPath';
 import DocumentRequest from './models/DocumentRequest';
+import { ClientState } from './models/ClientState';
 
 export const SMART_KEY = 'SMART_KEY';
 

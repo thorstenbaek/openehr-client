@@ -1,4 +1,6 @@
-interface ClientState {
+import { TokenResponse } from './TokenResponse';
+
+export interface ClientState {
   /**
    * The base URL of the Fhir server. The library should have detected it
    * at authorization time from request query params of from config options.

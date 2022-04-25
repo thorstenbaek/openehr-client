@@ -1,17 +1,17 @@
-import {randomString} from '../lib/randomString';
-import {Client, SMART_KEY} from '../Client';
-import {getSecurityExtensions} from './getSecurityExtensions';
-import {env} from '../BrowserEnvironment';
+import { randomString } from '../lib/randomString';
+import { Client, SMART_KEY } from '../Client';
+import { getSecurityExtensions } from './getSecurityExtensions';
+import { env } from '../BrowserEnvironment';
 
 export async function authorize(params: AuthorizeParams): Promise<Client> {
   const url = env.getUrl();
   new URL(location + '');
 
   // Obtain input
-  const {clientSecret, fakeTokenResponse, patientId, encounterId, target, width, height} = params;
+  const { clientSecret, fakeTokenResponse, patientId, encounterId, target, width, height } = params;
 
   // eslint-disable-next-line prefer-const
-  let {iss, launch, fhirServiceUrl, redirectUri, scope = '', clientId, completeInTarget} = params;
+  let { iss, launch, fhirServiceUrl, redirectUri, scope = '', clientId, completeInTarget } = params;
 
   const storage = env.getStorage();
 
