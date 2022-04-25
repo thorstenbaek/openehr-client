@@ -35,3 +35,4 @@ function buildTokenRequest(code, state) {
     return requestOptions;
 }
 exports.buildTokenRequest = buildTokenRequest;
+//# sourceMappingURL=buildTokenRequest.js.map

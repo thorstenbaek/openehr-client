@@ -1,4 +1,6 @@
 import { getAndCache } from '../lib/getAndCache';
+import { WellKnownSmartConfiguration } from '../models/WellKnownSmartConfiguration';
+
 
 /**
  * Fetches the well-known json file from the given base URL.

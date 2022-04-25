@@ -1,5 +1,6 @@
 import { responseToJSON } from './responseToJSON';
 import { checkResponse } from './checkResponse';
+import { FetchOptions } from '../models/FetchOptions';
 
 /**
  * This is our built-in request function. It does a few things by default

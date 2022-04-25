@@ -1,5 +1,7 @@
 import { env } from '../BrowserEnvironment';
 import { assert } from '../lib/assert';
+import { ClientState } from '../models/ClientState';
+
 
 /**
  * Builds the token request options. Does not make the request, just

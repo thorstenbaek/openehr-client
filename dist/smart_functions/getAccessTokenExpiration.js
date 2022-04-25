@@ -26,3 +26,4 @@ function getAccessTokenExpiration(tokenResponse) {
     return now + 300;
 }
 exports.getAccessTokenExpiration = getAccessTokenExpiration;
+//# sourceMappingURL=getAccessTokenExpiration.js.map

@@ -15,3 +15,4 @@ function absolute(path, baseUrl) {
     return String(baseUrl || '').replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
 }
 exports.absolute = absolute;
+//# sourceMappingURL=absolute.js.map

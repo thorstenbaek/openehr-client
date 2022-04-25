@@ -1,3 +1,4 @@
+import { FetchOptions } from '../models/FetchOptions';
 /**
  * This is our built-in request function. It does a few things by default
  * (unless told otherwise):

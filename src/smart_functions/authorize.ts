@@ -2,6 +2,8 @@ import { randomString } from '../lib/randomString';
 import { Client, SMART_KEY } from '../Client';
 import { getSecurityExtensions } from './getSecurityExtensions';
 import { env } from '../BrowserEnvironment';
+import { AuthorizeParams } from '../models/AuthorizeParams';
+import { ClientState } from '../models/ClientState';
 
 export async function authorize(params: AuthorizeParams): Promise<Client> {
   const url = env.getUrl();

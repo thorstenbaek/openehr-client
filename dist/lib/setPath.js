@@ -27,3 +27,4 @@ function setPath(obj, path, value, createEmpty = false) {
     return obj;
 }
 exports.setPath = setPath;
+//# sourceMappingURL=setPath.js.map

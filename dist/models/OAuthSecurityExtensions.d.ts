@@ -2,7 +2,7 @@
  * The three security endpoints that SMART servers might declare in the
  * conformance statement
  */
-interface OAuthSecurityExtensions {
+export interface OAuthSecurityExtensions {
     /**
      * You could register new SMART client at this endpoint (if the server
      * supports dynamic client registration)

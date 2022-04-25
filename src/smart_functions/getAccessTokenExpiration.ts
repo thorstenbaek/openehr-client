@@ -1,5 +1,7 @@
 import { env } from '../BrowserEnvironment';
 import { jwtDecode } from '../lib/jwtDecode';
+import { TokenResponse } from '../models/TokenResponse';
+
 
 /**
  * Given a token response, computes and returns the expiresAt timestamp.

@@ -1,14 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.myTypes = void 0;
-/* eslint-disable @typescript-eslint/no-namespace */
-const clienttypes = require("./Client");
-var myTypes;
-(function (myTypes) {
-    myTypes.clientypes = clienttypes;
-})(myTypes = exports.myTypes || (exports.myTypes = {}));
-//export function client(stateOrURI: fhirclient.ClientState | string): Client;
-/*export const AbortController: {
-    new (): AbortController;
-    prototype: AbortController;
-};*/
+exports.ready = exports.authorize = exports.openEHRClient = void 0;
+const Client_1 = require("./Client");
+Object.defineProperty(exports, "openEHRClient", { enumerable: true, get: function () { return Client_1.Client; } });
+const authorize_1 = require("./smart_functions/authorize");
+Object.defineProperty(exports, "authorize", { enumerable: true, get: function () { return authorize_1.authorize; } });
+const ready_1 = require("./smart_functions/ready");
+Object.defineProperty(exports, "ready", { enumerable: true, get: function () { return ready_1.ready; } });
+//# sourceMappingURL=index.js.map

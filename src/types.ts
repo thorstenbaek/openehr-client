@@ -1,3 +1,5 @@
+import { AuthorizeParams } from "./models/AuthorizeParams";
+
 /* eslint-disable @typescript-eslint/no-namespace */
 export declare namespace openehrclient {
   export function authorize(options: AuthorizeParams): Promise<string | void>;

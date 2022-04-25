@@ -16,3 +16,4 @@ function fetchWellKnownJson(baseUrl = '/', requestOptions) {
     });
 }
 exports.fetchWellKnownJson = fetchWellKnownJson;
+//# sourceMappingURL=fetchWellKnownJson.js.map

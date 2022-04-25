@@ -4,6 +4,8 @@ import { request } from '../lib/request';
 import { buildTokenRequest } from './buildTokenRequest';
 import { getAccessTokenExpiration } from './getAccessTokenExpiration';
 import { Client, SMART_KEY } from '../Client';
+import { ClientState } from '../models/ClientState';
+
 
 /**
  * The completeAuth function should only be called on the page that represents

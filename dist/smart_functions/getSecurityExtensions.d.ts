@@ -1,3 +1,4 @@
+import { OAuthSecurityExtensions } from '../models/OAuthSecurityExtensions';
 /**
  * Given a FHIR server, returns an object with it's Oauth security endpoints
  * that we are interested in. This will try to find the info in both the

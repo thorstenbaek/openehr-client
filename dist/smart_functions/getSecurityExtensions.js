@@ -31,3 +31,4 @@ function getSecurityExtensionsFromWellKnownJson(baseUrl = '/', requestOptions) {
     });
 }
 exports.getSecurityExtensionsFromWellKnownJson = getSecurityExtensionsFromWellKnownJson;
+//# sourceMappingURL=getSecurityExtensions.js.map

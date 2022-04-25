@@ -1,4 +1,6 @@
+import { OAuthSecurityExtensions } from '../models/OAuthSecurityExtensions';
 import { fetchWellKnownJson } from './fetchWellKnownJson';
+
 
 /**
  * Given a FHIR server, returns an object with it's Oauth security endpoints

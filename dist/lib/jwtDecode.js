@@ -12,3 +12,4 @@ function jwtDecode(token, env) {
     return payload ? JSON.parse(env.atob(payload)) : null;
 }
 exports.jwtDecode = jwtDecode;
+//# sourceMappingURL=jwtDecode.js.map

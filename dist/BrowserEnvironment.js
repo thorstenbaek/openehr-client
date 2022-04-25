@@ -33,3 +33,4 @@ class BrowserEnvironment {
 }
 exports.BrowserEnvironment = BrowserEnvironment;
 exports.env = new BrowserEnvironment();
+//# sourceMappingURL=BrowserEnvironment.js.map

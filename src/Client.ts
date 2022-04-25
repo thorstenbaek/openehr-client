@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer';
+
 import { getPath } from './lib/getPath';
 import DocumentRequest from './models/DocumentRequest';
 import { ClientState } from './models/ClientState';

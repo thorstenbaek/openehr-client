@@ -5,7 +5,7 @@
  * additional properties.
  * @see http://docs.smarthealthit.org/authorization/
  */
-interface TokenResponse {
+export interface TokenResponse {
     /**
      * If present, this tells the app that it is being rendered within an
      * EHR frame and the UI outside that frame already displays the selected

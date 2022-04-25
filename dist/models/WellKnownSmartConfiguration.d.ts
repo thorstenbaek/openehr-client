@@ -1,4 +1,4 @@
-interface WellKnownSmartConfiguration {
+export interface WellKnownSmartConfiguration {
     /**
      * URL to the OAuth2 authorization endpoint.
      */

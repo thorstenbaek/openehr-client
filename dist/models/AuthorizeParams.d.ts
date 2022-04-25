@@ -1,7 +1,7 @@
 /**
  * Authorization parameters that can be passed to `authorize` or `init`
  */
-interface AuthorizeParams {
+export interface AuthorizeParams {
     /**
      * This is the URL of the service you are connecting to.
      * For [EHR Launch](http://hl7.org/fhir/smart-app-launch/#ehr-launch-sequence)

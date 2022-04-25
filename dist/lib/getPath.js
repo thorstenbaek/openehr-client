@@ -47,3 +47,4 @@ function getPath(obj, path = '') {
     return result;
 }
 exports.getPath = getPath;
+//# sourceMappingURL=getPath.js.map

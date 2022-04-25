@@ -1,3 +1,4 @@
+import { ClientState } from './models/ClientState';
 export declare const SMART_KEY = "SMART_KEY";
 export declare class Client {
     /**

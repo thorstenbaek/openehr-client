@@ -63,3 +63,4 @@ function responseToJSON(resp) {
     return resp.text().then((text) => (text.length ? JSON.parse(text) : ''));
 }
 exports.responseToJSON = responseToJSON;
+//# sourceMappingURL=responseToJSON.js.map
