@@ -1,13 +1,7 @@
+import { Client } from './Client';
+import { authorize } from './smart_functions/authorize';
+import { ready } from './smart_functions/ready';
 
-export {authorize, ready} from "./Client";
-
-import * as clienttypes from './Client';
-
-export namespace myTypes {
-    export import clientypes = clienttypes;
-}
-    //export function client(stateOrURI: fhirclient.ClientState | string): Client;
-    /*export const AbortController: {
-        new (): AbortController;
-        prototype: AbortController;
-    };*/
+export { Client as openEHRClient };
+export { authorize as authorize };
+export{ ready as ready};

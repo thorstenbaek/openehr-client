@@ -1,11 +1,15 @@
 {
     "compilerOptions": {
       "module": "commonjs",
-      "target": "es2020",
+      "target": "ES2015",
       "declaration": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "sourceMap": true
     },
     "include": [
       "src/**/*"
+    ],
+    "exclude": [
+      "dist/**/*"
     ]
   }

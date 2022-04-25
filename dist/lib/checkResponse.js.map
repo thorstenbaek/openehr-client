@@ -1,0 +1,1 @@
+{"version":3,"file":"checkResponse.js","sourceRoot":"","sources":["../../src/lib/checkResponse.ts"],"names":[],"mappings":";AAAA;;GAEG;;;;;;;;;;;;AAEH,SAAsB,aAAa,CAAC,IAAc;;QAChD,IAAI,CAAC,IAAI,CAAC,EAAE,EAAE;YACZ,MAAM,IAAI,KAAK,CAAC,iBAAiB,CAAC,CAAC;SACpC;QACD,OAAO,IAAI,CAAC;IACd,CAAC;CAAA;AALD,sCAKC"}
