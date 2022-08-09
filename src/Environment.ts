@@ -9,26 +9,21 @@ export interface Environment {
     atob(str: string): string;
 }
 
-class BrowserEnvironment implements Environment {
-    _url: URL;
-    _storage: Storage;
+export class BrowserEnvironment implements Environment {
+    url: URL;
+    storage: Storage;
     
     constructor() {
-        this._storage = null;
+        this.url = new URL(location + "");
+        this.storage = new BrowserStorage()
     }
 
     getUrl(): URL {
-        if (!this._url) {
-            this._url = new URL(location + "");
-        }
-        return this._url;
+        return this.url;
     }
 
     getStorage(): Storage {
-        if (this._storage == null) {
-            this._storage = new BrowserStorage()
-        }
-        return this._storage;
+        return this.storage;
     }
 
     relative(path: string): string {
@@ -47,5 +42,3 @@ class BrowserEnvironment implements Environment {
         return window.atob(str);
     }
 }
-
-export const env:Environment = new BrowserEnvironment();

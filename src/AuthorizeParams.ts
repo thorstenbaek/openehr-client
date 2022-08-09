@@ -1,7 +1,7 @@
 /**
      * Authorization parameters that can be passed to `authorize` or `init`
      */
- interface AuthorizeParams {
+export default interface AuthorizeParams {
 
     /**
      * This is the URL of the service you are connecting to.
