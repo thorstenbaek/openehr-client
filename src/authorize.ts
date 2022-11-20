@@ -207,6 +207,8 @@ export async function completeAuth(env: Environment, utils: Utils): Promise<Clie
         // Now we need to determine when is this authorization going to expire
         state.expiresAt = getAccessTokenExpiration(utils, env, tokenResponse);
 
+        // throw new Error("bang!");
+
         // save the tokenResponse so that we don't have to re-authorize on
         // every page reload
         state = { ...state, tokenResponse };

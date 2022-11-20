@@ -28,14 +28,27 @@ export default class Client {
         this.resource = state.tokenResponse?.resource;
     }
 
-    post(relativeUrl: string, body: string): Promise<any> {
+    post(relativeUrl: string, body: string, customHeaders: Record<string, string> = {}): Promise<any> {
+        var headers: Record<string,string> = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + this.state.tokenResponse?.access_token,
+        };
+        
+        var keys = Object.keys(customHeaders);
+
+        if (keys.length > 0) {
+            keys.forEach(key => {
+                headers[key] = customHeaders[key];
+            });            
+        }
+        
+        console.log("Headers", headers);
+
+        
         return fetch(`${this.state.serverUrl}/${relativeUrl}`, {
             method: "POST",
             mode: "cors", 
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + this.state.tokenResponse?.access_token,
-            },
+            headers: headers,
             body: body
         })        
     }
@@ -45,7 +58,10 @@ export default class Client {
             throw Error("Missing patient in client");
         }
         
-        let queryContext: {[name:string]:[string]} = {};        
+        //let queryContext: {[name:string]:[string]} = {};        
+        type QueryContextVariables = Record<string,string[]>;       
+        const queryContext :QueryContextVariables = {};
+        
         queryContext.PatientId = [this.patient];
         
         var param = {
@@ -59,27 +75,24 @@ export default class Client {
         return await response.json();
     }
 
-    async compose(composition: string): Promise<any> {
+    async compose(concept: string, composition: string): Promise<any> {
         if (!this.patient) {
             throw Error("Missing patient in client");
         }
+        
+        var conceptArray: string[] = concept.split(":");
 
-        var buffer = Buffer.from(composition);
-        var base64string = buffer.toString("base64");
+        let documentType:number = parseInt(conceptArray[0]);
+        let template: number = parseInt(conceptArray[1]);
+        
+        var context: Record<string, string> = {
+            "dips-pas-patientId": this.patient,
+            "dips-healthrecord-document-type":documentType.toString(),
+            "dips-healthrecord-templateId":template.toString()
+        }       
+        console.log(composition);
 
-
-        var documentRequest: DocumentRequest = {
-            content: base64string,
-            contentType: "application/json",
-            templateId: 1002761,
-            documentTypeId: -4027,
-            patientId: parseInt(this.patient),
-            authorId: 1004725, //Rekvirent: Thor Stenbæk  dips-hcpid": "1004725"
-            eventTime: new Date().toISOString(),
-            documentFormat: 16            
-        }
-
-        const response = await this.post("document", JSON.stringify(documentRequest));
+        const response = await this.post("composition", composition, context);
         return response.ok;
     }
 }
