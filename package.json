@@ -1,12 +1,13 @@
 {
   "name": "openehr-client-js",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.10",
   "description": "Client library for SMART on OpenEHR apps",
   "keywords": [
     "OpenEHR",
     "REST Client",
     "OAuth2"
   ],
+  "type": "module",
   "author": "Thor Stenbæk tst@dips.no",
   "license": "MIT",
   "main": "lib/index.js",

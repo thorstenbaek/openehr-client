@@ -1,4 +1,4 @@
-import {Environment} from "./Environment";
+import Environment from "./Environment";
 import Client from "./Client";
 import { Utils } from "./Utils";
 import AuthorizeParams from "./AuthorizeParams";

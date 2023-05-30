@@ -1,4 +1,4 @@
-import { BrowserEnvironment } from "./Environment";
+import BrowserEnvironment from "./BrowserEnvironment";
 import {authorize as internalAuthorize, ready as internalReady} from "./authorize";
 import Client from "./Client";
 import { BrowserUtils } from "./Utils";
